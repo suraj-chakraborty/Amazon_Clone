@@ -8,6 +8,7 @@ function ProductFeed({ products }) {
         <Product
           key={id}
           id={id}
+          price={price}
           title={title}
           description={description}
           category={category}
