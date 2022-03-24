@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Banner from "../component/Banner";
+import Footer from "../component/Footer";
 import Header from "../component/Header";
 import ProductFeed from "../component/ProductFeed";
 
@@ -19,6 +20,7 @@ export default function Home({ products }) {
         {/* Productfeed */}
         <ProductFeed products={products} />
       </main>
+      <Footer />
     </div>
   );
 }
