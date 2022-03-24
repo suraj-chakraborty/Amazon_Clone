@@ -10,6 +10,7 @@ function Header() {
   // console.log(session.user);
   const router = useRouter();
   const items = useSelector(selectItems);
+  console.log(items);
 
   return (
     <header>
