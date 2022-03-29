@@ -4,19 +4,17 @@ import Product from "./Product";
 function ProductFeed({ products }) {
   return (
     <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-4 md:-mt-32 mx-auto">
-      {products
-        .slice(0, 4)
-        .map(({ id, title, price, description, category, image }) => (
-          <Product
-            key={id}
-            id={id}
-            price={price}
-            title={title}
-            description={description}
-            category={category}
-            image={image}
-          />
-        ))}
+      {products.map(({ id, title, price, description, category, image }) => (
+        <Product
+          key={id}
+          id={id}
+          price={price}
+          title={title}
+          description={description}
+          category={category}
+          image={image}
+        />
+      ))}
       <img
         className="md:col-span-full"
         src="https://links.papareact.com/dyz"

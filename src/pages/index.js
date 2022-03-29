@@ -3,6 +3,7 @@ import Banner from "../component/Banner";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import ProductFeed from "../component/ProductFeed";
+import axios from "axios";
 
 export default function Home({ products }) {
   return (
