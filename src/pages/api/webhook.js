@@ -4,7 +4,7 @@ import * as admin from "firebase-admin";
 // connection to firebase
 const serviceAccount = require("../../../access.json");
 
-const app = !admin.app.length
+const app = !admin.apps.length
   ? admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
     })
@@ -17,7 +17,7 @@ const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 // put data on firebase
 const fulfillOrder = async (session) => {
-  console.log("fullfilling order", session);
+  //   console.log("fullfilling order", session);
   return app
     .firestore()
     .collection("users")
@@ -28,7 +28,7 @@ const fulfillOrder = async (session) => {
       amount: session.amount_total * 72,
       amount_shipping: session.total_details.amount_shiping * 72,
       images: JSON.parse(session.metadata.images),
-      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      timestamp: Math.floor(new Date().getTime() / 1000),
     })
     .then(() => {
       console.log(`success: order ${session.id} has been added to DB`);
@@ -38,7 +38,7 @@ const fulfillOrder = async (session) => {
 export default async (req, res) => {
   if (req.method === "POST") {
     const requestBuffer = await buffer(req);
-    const payload = requestBuffer.toString;
+    const payload = requestBuffer.toString();
     const sig = req.headers["stripe-signature"];
 
     let event;
