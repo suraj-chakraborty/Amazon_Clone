@@ -4,9 +4,10 @@ import React from "react";
 import db from "../../firebase";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
+import Order from "../component/Order";
 
 function Orders({ orders }) {
-  console.log("🚀 ~ file: orders.js ~ line 8 ~ Orders ~ orders", orders);
+  // console.log("🚀 ~ file: orders.js ~ line 8 ~ Orders ~ orders", orders);
   const session = useSession();
 
   return (
@@ -14,14 +15,30 @@ function Orders({ orders }) {
       <Header />
       <main className=" max-w-screen-xl mx-auto p-10">
         <h1 className="text-3xl border-b mb-2 pb-1 border-yellow-400">
-          {" "}
           Your Orders
         </h1>
-        {session ? <h2>X-orders</h2> : <h2>sign in to see your orders</h2>}
-        <div className="mt-5 space-y-4"></div>
-      </main>
-
-      <Footer />
+        {session ? (
+          <h2>{orders.length}-orders</h2>
+        ) : (
+          <h2>sign in to see your orders</h2>
+        )}
+        <div className="mt-5 space-y-4">
+          {orders?.map(
+            ({ id, amount, amountShipping, items, images, timestamp }) => (
+              <Order
+                key={id}
+                id={id}
+                amount={amount}
+                amountShipping={amountShipping}
+                items={items}
+                timestamp={timestamp}
+                images={images}
+              />
+            )
+          )}
+        </div>
+      </main>{" "}
+      <Footer />;
     </div>
   );
 }
@@ -65,7 +82,7 @@ export async function getServerSideProps(context) {
     }))
   );
   return {
-    prop: {
+    props: {
       orders,
     },
   };
