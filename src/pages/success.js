@@ -23,7 +23,6 @@ function success() {
             onClick={() => router.push("/orders")}
             className="button mt-10"
           >
-            {" "}
             go to my orders
           </button>
         </div>
